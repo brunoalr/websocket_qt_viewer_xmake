@@ -23,8 +23,14 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
 
-      - if: ${{ !contains(matrix.os, 'macos') }}
-        name: Install  (Linux and Windows)
+      - if: matrix.os == 'ubuntu-24.04'
+        name: Install xmake (Ubuntu 24.04)
+        run: |
+          sudo apt update && sudo apt install -y xmake
+
+      # Ubuntu 22.04 does not have xmake via apt
+      - if: contains(matrix.os, 'windows') || matrix.os == 'ubuntu-22.04'
+        name: Install (Windows and Ubuntu 22.04)
         uses: xmake-io/github-action-setup-xmake@b48f0b6b07917d96d0dcb9c6e54a14db31936560 # 1.2.1
 
       - if: contains(matrix.os, 'macos')
