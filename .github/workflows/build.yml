@@ -37,7 +37,7 @@ jobs:
         name: Install qt dependencies (Ubuntu)
         run: |
           # TODO:Is the qt6widgets package broken?
-          sudo apt update && sudo apt install -y libglfw3-dev libgles2-mesa-dev
+          sudo apt update && sudo apt install -y libglfw3-dev
 
       - if: contains(matrix.os, 'windows')
         name: Configure xmake (Windows)
